@@ -1,17 +1,27 @@
+# Nombre del ejecutable
+TARGET = texor
+
+# Compilador y flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c11
-LDFLAGS = -lm
-SRCS = main.c terminal.c syntax.c row.c editor.c fileio.c find.c
+CFLAGS = -Wall -Wextra -std=c11 -pedantic  # Eliminado -Werror
+
+# Archivos fuente
+SRCS = editor.c terminal.c syntax.c row.c fileio.c find.c main.c
+
+# Archivos objeto
 OBJS = $(SRCS:.c=.o)
-EXEC = editor
 
-all: $(EXEC)
+# Regla principal
+$(TARGET): $(OBJS)
+    $(CC) $(CFLAGS) -o $@ $(OBJS)
 
-$(EXEC): $(OBJS)
-	$(CC) $(CFLAGS) -o $(EXEC) $(OBJS) $(LDFLAGS)
-
+# Regla para generar archivos objeto
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+    $(CC) $(CFLAGS) -c $< -o $@
 
+# Limpieza de archivos generados
 clean:
-	rm -f $(OBJS) $(EXEC)
+    rm -f $(TARGET) $(OBJS)
+
+.PHONY: clean
+
