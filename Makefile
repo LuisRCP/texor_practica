@@ -13,14 +13,14 @@ OBJS = $(SRCS:.c=.o)
 
 # Regla principal
 $(TARGET): $(OBJS)
-<TAB>$(CC) $(CFLAGS) -o $@ $(OBJS)
+  $(CC) $(CFLAGS) -o $@ $(OBJS)
 
 # Regla para generar archivos objeto
 %.o: %.c
-<TAB>$(CC) $(CFLAGS) -c $< -o $@
+  $(CC) $(CFLAGS) -c $< -o $@
 
 # Limpieza de archivos generados
 clean:
-<TAB>rm -f $(TARGET) $(OBJS)
+  rm -f $(TARGET) $(OBJS)
 
 .PHONY: clean
